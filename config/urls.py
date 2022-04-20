@@ -24,4 +24,5 @@ urlpatterns = [
     # this built in app provies views and urls for login and logout
     path("accounts/", include("django.contrib.auth.urls")),  # new
     path("", include("pages.urls")),  # new
+    path("todos/", include("todos.urls"))
 ]

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Local
     "accounts.apps.AccountsConfig",  # new
     "pages.apps.PagesConfig",  # new
+    "todos.apps.TodosConfig",  # new
 ]
 
 MIDDLEWARE = [
@@ -113,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "US/Pacific"
 
 USE_I18N = True
 

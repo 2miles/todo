@@ -1,8 +1,8 @@
 # pages/urls.py
 from django.urls import path, include
 
-from todos.views import TodoListView
+from .views import HomePageView
 
 urlpatterns = [
-    path("", TodoListView.as_view(), name="home"),
+    path("", HomePageView.as_view(), name="home"),
 ]

@@ -1,7 +1,9 @@
 
 * User authentication 
-* Password change and password reset functionality using email validation
-* Bootstrap framework for basic front-end styling
+* Email validation for password reset 
+* PostgreSQL database
+* Bootstrap framework for front-end styling
+
 
 
 

@@ -18,3 +18,5 @@ class Todo(models.Model):
     def get_absolute_url(self):
         pass
         # return reverse("todo_detail", kwargs={"pk": self.pk})
+
+    

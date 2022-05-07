@@ -12,8 +12,25 @@ class TodoListView(ListView):
     template_name = "todo_list.html"
 
     def get_queryset(self):
-        """Returns Todos that belong to the current user, oldest first"""
-        return Todo.objects.filter(user=self.request.user).order_by("start_date")
+        """Returns un-completed Todos that belong to the current user, oldest first"""
+        return (
+            Todo.objects.filter(user=self.request.user)
+            .exclude(completed=True)
+            .order_by("start_date")
+        )
+
+
+class TodoCompletedView(ListView):
+    model = Todo
+    template_name = "todo_list.html"
+
+    def get_queryset(self):
+        """Returns completed Todos that belong to the current user, newest first"""
+        return (
+            Todo.objects.filter(user=self.request.user)
+            .exclude(completed=False)
+            .order_by("-start_date")
+        )
 
 
 class TodoDetailView(DetailView):

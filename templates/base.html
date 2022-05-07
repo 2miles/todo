@@ -20,7 +20,7 @@
                         {% if user.is_authenticated %}
                         <a class="navbar-brand" href="{% url 'todo_list' %}">Todos</a>
                         <li>
-                            <a href="#" class="nav-link px-2 link-dark">+ New todo</a>
+                            <a href="{% url 'todo_new' %}" class="nav-link px-2 link-dark">+ New todo</a>
                         </li>
                     </ul>
                     <div class="dropdown text-end">

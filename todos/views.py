@@ -28,7 +28,7 @@ class TodoListView(ListView):
         return (
             Todo.objects.filter(user=self.request.user)
             .exclude(completed=True)
-            .order_by("start_date")
+            .order_by("-start_date")
         )
 
 

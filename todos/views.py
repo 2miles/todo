@@ -24,7 +24,7 @@ class TodoListView(ListView):
         return context
 
     def get_queryset(self):
-        """Returns un-completed Todos that belong to the current user, oldest first"""
+        """Returns un-completed Todos that belong to the current user, newest first"""
         return (
             Todo.objects.filter(user=self.request.user)
             .exclude(completed=True)

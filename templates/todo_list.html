@@ -3,7 +3,11 @@
 {% block content %}
 
 {% if user.is_authenticated %}
+
+{% if item_count > 0 %}
 {{ user.username }}, you have {{ item_count }} items to complete still
+{% endif %}
+
 {% for todo in todo_list %}
 <div class="card">
     <div class="card-header">

@@ -13,6 +13,16 @@ class TodoListView(ListView):
     model = Todo
     template_name = "todo_list.html"
 
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(TodoListView, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+        item_count = Todo.objects.filter(
+            user=self.request.user, completed=False
+        ).count()
+        context["item_count"] = item_count
+        return context
+
     def get_queryset(self):
         """Returns un-completed Todos that belong to the current user, oldest first"""
         return (

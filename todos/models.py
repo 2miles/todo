@@ -13,7 +13,10 @@ class Todo(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
+        str = self.title
+        if len(str) > 30:
+            str = str[:27] + "..."
+        return str
 
     def get_absolute_url(self):
         pass

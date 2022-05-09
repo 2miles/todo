@@ -1,3 +1,5 @@
+from datetime import datetime
+from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
@@ -46,6 +48,14 @@ class TodoUpdateView(UpdateView):
     fields = ("title", "description", "completed")
     template_name = "todo_edit.html"
     success_url = reverse_lazy("todo_list")
+
+    def form_valid(self, form) -> HttpResponse:
+        todo = self.object
+        if form.instance.completed and todo.finish_date is None or False:
+            todo.finish_date = datetime.now()
+        if not form.instance.completed:
+            todo.finish_date = None
+        return super().form_valid(form)
 
 
 class TodoDeleteView(DeleteView):

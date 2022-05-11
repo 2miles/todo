@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for date in date_list %}
+<a href="{{ date|date:'Y'}}">
+    <h1> {{ date|date:"Y"}} </h1>
+</a>
+{% endfor %}
+{% endblock content %}

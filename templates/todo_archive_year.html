@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="{% url 'todo_archive' %}">Back</a>
+
+<h1> {{ year|date:"Y"}} </h1>
+<hr>
+{% for date in date_list %}
+<a href="{{ date|date:'b'}}">
+    <h1> {{ date|date:"F"}} </h1>
+</a>
+{% endfor %}
+{% endblock content %}

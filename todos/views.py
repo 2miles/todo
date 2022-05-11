@@ -2,7 +2,11 @@ from datetime import datetime
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
-from django.views.generic.dates import MonthArchiveView
+from django.views.generic.dates import (
+    ArchiveIndexView,
+    YearArchiveView,
+    MonthArchiveView,
+)
 from django.urls import reverse_lazy
 
 from .models import Todo
@@ -57,6 +61,26 @@ class TodoDetailView(DetailView):
 class TodoMonthArchiveView(MonthArchiveView):
     model = Todo
     template_name = "todo_archive_month.html"
+    date_field = "finish_date"
+    queryset = Todo.objects.all()
+
+    def get_queryset(self):
+        return self.queryset.filter(user=self.request.user)
+
+
+class TodoYearArchiveView(YearArchiveView):
+    model = Todo
+    template_name = "todo_archive_year.html"
+    date_field = "finish_date"
+    queryset = Todo.objects.all()
+
+    def get_queryset(self):
+        return self.queryset.filter(user=self.request.user)
+
+
+class TodoArchiveIndexView(ArchiveIndexView):
+    model = Todo
+    template_name = "todo_archive.html"
     date_field = "finish_date"
     queryset = Todo.objects.all()
 

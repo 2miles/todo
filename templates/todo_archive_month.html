@@ -2,12 +2,13 @@
 
 {% block content %}
 
-
+<a href="{{ request.META.HTTP_REFERER }}">Back</a>
 <h1> {{ month|date:"F Y"}} </h1>
+<hr>
 <ul>
     {% for todo in object_list %}
     <li>{{ todo.finish_date|date:"F j, Y" }}:
-        <a href="{% url 'todo_detail' todo.pk%}">{{ todo }}</a>
+        <a href="{% url 'todo_detail' todo.pk %}">{{ todo }}</a>
     </li>
     {% endfor %}
 </ul>

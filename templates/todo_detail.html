@@ -3,9 +3,17 @@
 {% block content %}
 
 <div class="todo-entry">
-    <h2>{{ object.title }}</h2>
-    <p><b>Added: </b> {{ object.start_date }}</p>
-    <p>{{ object.description }}</p>
+    <div class="card">
+        <div class="card-header">
+            <h2>{{ object.title }}</h2>
+        </div>
+        <div class="card-body">
+            <p>{{ object.description }}</p>
+        </div>
+        <div class="card-footer">
+            <p><b>Added: </b> {{ object.start_date }}</p>
+        </div>
+    </div>
 </div>
 <p>
     <a href="{% url 'todo_edit' todo.pk %}">Edit</a> |

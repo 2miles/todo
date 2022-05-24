@@ -7,8 +7,12 @@
 <h1> {{ year|date:"Y"}} </h1>
 <hr>
 {% for date in date_list %}
-<a href="{{ date|date:'b'}}">
-    <h1> {{ date|date:"F"}} </h1>
-</a>
+<div class="card">
+    <div class="card-header">
+        <a href="{{ date|date:'b'}}">
+            <h3> {{ date|date:"F"}} </h3>
+        </a>
+    </div>
+</div>
 {% endfor %}
 {% endblock content %}

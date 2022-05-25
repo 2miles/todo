@@ -12,12 +12,15 @@
         </div>
         <div class="card-footer">
             <p><b>Added: </b> {{ object.start_date }}</p>
+            {% if object.finish_date != None %}
+            <p><b>Finished: </b> {{ object.finish_date }}</p>
+            {% endif %}
         </div>
     </div>
 </div>
 <p>
-    <a href="{% url 'todo_edit' todo.pk %}">Edit</a> |
-    <a href="{% url 'todo_delete' todo.pk %}">Delete</a>
+    <a href="{% url 'todo_edit' todo.pk %}" class="btn btn-info ml-2">Edit</a>
+    <a href="{% url 'todo_delete' todo.pk %}" class="btn btn-danger ml-2">Delete</a>
 </p>
 
 {% endblock content %}

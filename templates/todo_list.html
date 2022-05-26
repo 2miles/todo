@@ -14,11 +14,11 @@
         <span class="font-weight-bold">
             {% if not todo.completed %}
             <form action="/todos/{{ todo.pk }}/complete/" style="display: inline;" method="post">{% csrf_token %}
-                <input type="submit" value="Done" class="btn btn-info ml-2">
+                <input type="submit" value="Done" class="btn btn-info ml-2 px-4">
             </form>
             {% endif %}
             <b>
-                <a href="{% url 'todo_detail' todo.pk%}" style="text-decoration: none;">{{ todo }}</a>
+                <a href="{% url 'todo_detail' todo.pk%}" class=px-2 style="text-decoration: none;">{{ todo }}</a>
             </b>
         </span>
         <span class="text-muted float-end">

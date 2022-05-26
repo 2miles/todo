@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<a href="{{ request.META.HTTP_REFERER }}">Back</a>
-<h1> {{ month|date:"F Y"}} </h1>
+<a href="{{ request.META.HTTP_REFERER }}" class="btn btn-info ml-2">Back</a>
+<h1 id="archive_header"> {{ month|date:"F Y"}} </h1>
 <hr>
 <ul>
     {% for todo in object_list %}

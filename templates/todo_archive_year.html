@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<a href="{% url 'todo_archive' %}">Back</a>
+<a href="{% url 'todo_archive' %}" class="btn btn-info ml-2">Back</a>
 
-<h1> {{ year|date:"Y"}} </h1>
+<h1 id="archive_header"> {{ year|date:"Y"}} </h1>
 <hr>
 {% for date in date_list %}
 <div class="card">

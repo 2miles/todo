@@ -1,13 +1,14 @@
 <!-- templates/home.html -->
+
 {% extends "base.html" %}
 
-{% block title %}Eg-ToDo{% endblock title %}
+{% block title %}ToDo{% endblock title %}
 
 {% block content %}
 {% if user.is_authenticated %}
 Welcome {{ user.username }}
 {% else %}
-<h2>Welcome to Eg-ToDo</h2>
+<h2>Welcome. Lets get stuff done!</h2>
 <p>Login or Signup to continue</p>
 {% endif %}
 {% endblock content %}

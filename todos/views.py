@@ -77,7 +77,7 @@ class TodoMonthArchiveView(MonthArchiveView):
     queryset = Todo.objects.all()
 
     def get_queryset(self):
-        return self.queryset.filter(user=self.request.user)
+        return self.queryset.filter(user=self.request.user).order_by("finish_date")
 
 
 class TodoYearArchiveView(YearArchiveView):

@@ -22,10 +22,10 @@
             </b>
         </span>
         <span class="text-muted float-end">
-            {{ todo.start_date|date:"M jS, G:i" }}
+            {{ todo.start_date|date:"M jS" }}
             {% if todo.finish_date %}
             &nbsp --->
-            {{ todo.finish_date|date:"M jS, G:i" }}
+            {{ todo.finish_date|date:"M jS" }}
             {% endif %}
         </span>
     </div>

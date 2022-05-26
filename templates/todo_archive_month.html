@@ -7,7 +7,7 @@
 <hr>
 <ul>
     {% for todo in object_list %}
-    <li>{{ todo.finish_date|date:"F j, Y" }}:
+    <li>{{ todo.finish_date|date:"jS, D" }}:
         <a href="{% url 'todo_detail' todo.pk %}">{{ todo }}</a>
     </li>
     {% endfor %}

@@ -92,7 +92,6 @@ DATABASES = {
         "PASSWORD": env.str("POSTGRESQL_PASSWORD"),
         "HOST": "localhost",
         "PORT": "5432",
-        
     }
 }
 
@@ -132,6 +131,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]  # new
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -154,5 +155,3 @@ EMAIL_HOST_USER = "apikey"
 EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
-

@@ -1,5 +1,5 @@
 from datetime import datetime
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.views.generic.dates import (
@@ -9,6 +9,7 @@ from django.views.generic.dates import (
 )
 from django.urls import reverse_lazy
 
+from .forms import IsCompletedForm
 from .models import Todo
 
 # Create your views here.
@@ -19,6 +20,7 @@ class TodoListView(ListView):
     template_name = "todo_list.html"
 
     def get_context_data(self, **kwargs):
+        form = IsCompletedForm()
         # Call the base implementation first to get the context
         context = super(TodoListView, self).get_context_data(**kwargs)
         # Create any data and add it to the context
@@ -26,6 +28,7 @@ class TodoListView(ListView):
             user=self.request.user, completed=False
         ).count()
         context["item_count"] = item_count
+        context["form"] = form
         return context
 
     def get_queryset(self):
@@ -35,6 +38,15 @@ class TodoListView(ListView):
             .exclude(completed=True)
             .order_by("-start_date")
         )
+
+
+def completed_view(request, pk):
+    object = Todo.objects.get(id=pk)
+    if object.user == request.user:
+        object.completed = True
+        object.finish_date = datetime.now()
+        object.save()
+    return HttpResponseRedirect("/todos/")
 
 
 class TodoCompletedView(ListView):

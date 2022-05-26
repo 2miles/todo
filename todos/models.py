@@ -34,9 +34,10 @@ class Todo(models.Model):
         self.description = self.description.capitalize()
 
         if self.finish_date and self.completed is False:
-            raise ValidationError(
-                {"completed": "Task must be completed if finish time is chosen."}
-            )
+            self.finish_date = None
+            # raise ValidationError(
+            #     {"completed": "Task must be completed if finish time is chosen."}
+            # )
 
         if self.finish_date:
             if self.finish_date <= self.start_date:

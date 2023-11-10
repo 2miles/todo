@@ -1,0 +1,115 @@
+
+INITIAL PROJECT SETUP
+=============================================================
+- create new directory in ~/Dev/django directory
+
+- install django and python-decouple in new Virtual Env.
+    > pipenv install django
+    > pipenv install python-decouple
+    > pipenv install gunicorn
+
+- run virtual environment
+    > pipenv shell
+
+- create a new poject
+    > django-admin startproject new_project .
+
+- create a new app in the project
+    > python manage.py startapp app_name
+
+- start local web server
+    > python manage.py runserver
+
+- create .env for sensitive data
+    > SECRET_KEY = 'blablabla'
+
+- update settings.py
+    > from decouple import config
+    > SECRET_KEY = config("SECRET_KEY")
+    > 'app_name.apps.App_nameConfig',
+    > set AlLOWED_HOSTS to '*'
+    > 'DIRS': BASE_DIR / "templates"
+
+- create initial database
+    > python manage.py migrate
+
+- create super user
+    > python manage.py createsuperuser
+
+-  register app in admin.py
+    > from .models import App_name
+    > admin.site.register(App_name)
+
+- init Git, add .gitignore, commit and push to gitHub
+
+
+- DEPLOY TO HEROKU
+==================================================================
+
+Create and populate necessary files:
+    > vim Procfile 
+        web: gunicorn new_project.wsgi --log-file -
+    > vim runtime.txt
+        python 3.10.3
+    > pip freeze > requirements.txt
+
+
+    > heroku config:set DISABLE_COLLECTSTATIC=1
+    > heroku config:set SECRET_KEY="blablabla"
+    > git push origin main
+    > heroku login
+    > heroku create
+    > git push heroku main
+    > heroku ps:scale web=1
+    > heroku run manage.py migrate
+    > heroku run manage.py makemigrations
+    > heroku run manage.py createsupersuer  
+    > heroku open
+
+
+Trying to get heroku server to show my local database:
+-----------------------------------------------------------------
+- get sqlite3 db to work with Heroku
+    > pip install django-heroku
+       * installs psycopg2, dj-database-url, whitenoise
+    - add to the top of setitngs.py:
+          import dj_database_url
+    - add to bottom of settings.py:
+          db_from_env = dj_database_url.config(conn_max_age=600)
+          DATABASES['default'].update(db_from_env)
+
+
+STATIC FILES
+==================================================================
+
+    - make project-level directory: static
+    - make sub-directory directory: static/css
+    - create a base.css file in static/css
+    - add to bottom of settings.py
+        STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))] 
+        STATIC_ROOT = BASE_DIR / "staticfiles"
+        STATICFILES_STORAGE = 
+         "django.contrib.staticfiles.storage.StaticFilesStorage"
+    - add {$ load static $} to top of base.html
+    - add stylesheet link to html-head in base.html:
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    - Before each new deployment we must run:
+        > python manage.py collectstatic
+
+getting ready for deployment:
+-----------------------------------------------------------------
+    > pip install whitenoise
+    - add to settings.py INSTALLED_APPS:
+       "whitenoise.runserver_nostatic" above "django.contrib.staticfiles"
+    - add to settings.py MIDDLEWARE:
+       "whitenoise.middleware.WhiteNoiseMiddleware"
+    - change STATICFILES_STORAGE to 
+       "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    > python manage.py collectstatic
+
+    
+
+
+
+
+    
